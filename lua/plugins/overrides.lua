@@ -20,4 +20,14 @@ return {
       },
     },
   },
+  {
+    "mason-org/mason.nvim",
+    opts = function(_, opts)
+      -- bootstrap-mason.lua owns installer-time provisioning and filters tools
+      -- by available runtimes. Avoid racing LazyVim's startup installer.
+      if vim.env.LAZY_MASON_BOOTSTRAP == "1" then
+        opts.ensure_installed = {}
+      end
+    end,
+  },
 }

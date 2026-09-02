@@ -111,7 +111,11 @@ registry.refresh(function()
           pending = pending - 1
           table.insert(failed, name)
         end)
-        pkg:install()
+        -- LazyVim may already be installing the same tool during startup.
+        -- Keep our callbacks attached, but do not start a duplicate install.
+        if not pkg:is_installing() then
+          pkg:install()
+        end
       end
     end
   end
@@ -149,4 +153,8 @@ if pending > 0 then
 end
 io.write("\n")
 
-vim.cmd("qa!")
+if #failed > 0 or pending > 0 then
+  vim.cmd("cquit!")
+else
+  vim.cmd("qa!")
+end

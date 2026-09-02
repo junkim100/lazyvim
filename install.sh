@@ -224,10 +224,10 @@ fi
 
 echo
 echo "Restoring plugin commits from lazy-lock.json"
-"$BIN/nvim" --headless "+Lazy! restore" +qa
+LAZY_RESTORE=1 "$BIN/nvim" --headless "+Lazy! restore" +qa
 
 echo "Installing available Mason language servers and formatters"
-"$BIN/nvim" --headless -c "luafile $LAZYVIM_DIR/bootstrap-mason.lua"
+LAZY_MASON_BOOTSTRAP=1 "$BIN/nvim" --headless -c "luafile $LAZYVIM_DIR/bootstrap-mason.lua"
 
 echo
 echo "Installed $("$BIN/nvim" --version | sed -n '1p') with the pinned LazyVim configuration."
