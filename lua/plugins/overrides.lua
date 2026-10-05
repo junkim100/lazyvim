@@ -5,15 +5,15 @@ return {
   -- That makes the explorer close to useless in a dotfiles repo, and it also hides
   -- .github/, .claude/, .env, and friends in normal projects.
   --
-  -- `ignored` stays false on purpose: that one controls GITIGNORED files, and
-  -- flipping it floods the picker with .venv/, __pycache__/, and node_modules/.
-  -- Press H inside any picker to toggle hidden at runtime.
+  -- Show gitignored files and directories in the explorer as well.
+  -- File finding and grep still respect ignore rules to keep results focused.
+  -- Press H in the explorer to toggle hidden files, or I to toggle ignored files.
   {
     "folke/snacks.nvim",
     opts = {
       picker = {
         sources = {
-          explorer = { hidden = true, ignored = false },
+          explorer = { hidden = true, ignored = true },
           files = { hidden = true, ignored = false },
           grep = { hidden = true, ignored = false },
         },
