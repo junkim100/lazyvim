@@ -11,6 +11,9 @@ return {
   {
     "folke/snacks.nvim",
     opts = {
+      -- MOD 22 -- delete directly after confirmation on every machine.
+      -- System Trash is unavailable on mounts such as NHN's /upstg.
+      explorer = { trash = false },
       picker = {
         sources = {
           explorer = { hidden = true, ignored = true },
