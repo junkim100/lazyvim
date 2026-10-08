@@ -102,3 +102,7 @@ if vim.env.SSH_CONNECTION or vim.env.SSH_TTY then
     paste = { ["+"] = from_unnamed, ["*"] = from_unnamed },
   }
 end
+
+-- MOD 23 -- soft-wrap long lines by default without changing file contents.
+-- <leader>uw still toggles wrapping for the current window.
+vim.opt.wrap = true

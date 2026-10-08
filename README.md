@@ -48,6 +48,7 @@ Plugin versions only change when you run `:Lazy update` and commit the updated l
 | 20 | `<leader>qx` deletes a session | persistence.nvim can list, load, and pick sessions but has no way to remove one, so clearing out a directory you have since renamed meant deleting the file by hand. Dedupes by file rather than by directory, unlike its own `select()`, so per-branch sessions are visible. |
 | 21 | render-markdown's headings and checkboxes | The markdown extra already renders bullets, tables, code blocks, blockquotes, and concealed emphasis, but LazyVim sets `heading.icons = {}` and `checkbox.enabled = false`, which are the two most visible parts. With them off a `.md` buffer reads as though nothing is rendering when nearly all of it is. The line under the cursor still shows raw source, which is render-markdown working as intended, not a gap. |
 | 22 | Permanent explorer deletion | Explorer deletions remove files and directories directly on every machine after the existing confirmation prompt. System Trash is disabled, including on Macs, so deletion also works on mounts such as NHN's `/upstg` where `gio trash` is unsupported. |
+| 23 | Soft wrapping by default | Long lines wrap visually without inserting newlines into files. `<leader>uw` toggles wrapping for the current window. The minimap uses a separate split so it cannot cover wrapped text. |
 
 ## Warning: filter, do not replace
 

@@ -1,10 +1,8 @@
 return {
   -- MOD 9 -- minimap, replacing Zed's `"minimap": { "show": "always" }`.
   --
-  -- Terminal minimaps draw at character-cell resolution, so this is coarser than
-  -- Zed's pixel-rendered one. neominimap uses treesitter for the colouring, which
-  -- makes it the closest of the options. It needs `wrap = false`, which LazyVim
-  -- already sets.
+  -- Terminal minimaps draw at character-cell resolution and use treesitter for colouring.
+  -- A separate split reserves space for the minimap so it cannot cover wrapped text.
   --
   -- Toggle with <leader>mm if it turns out to cost more width than it earns.
   {
@@ -16,27 +14,34 @@ return {
       { "<leader>mf", "<cmd>Neominimap focus<cr>", desc = "Minimap: focus" },
     },
     init = function()
-      vim.opt.sidescrolloff = 36 -- so the minimap does not shove text off-screen
       vim.g.neominimap = {
         auto_enable = true,
-        layout = "float",
-        float = { window_border = "none" },
+        layout = "split",
         -- Skip buffers where a minimap is meaningless or actively in the way.
         exclude_filetypes = {
-          "help", "bigfile", "snacks_picker_list", "snacks_layout_box",
-          "snacks_picker_input", "trouble", "lazy", "mason", "neo-tree",
+          "help",
+          "bigfile",
+          "snacks_picker_list",
+          "snacks_layout_box",
+          "snacks_picker_input",
+          "trouble",
+          "lazy",
+          "mason",
+          "neo-tree",
           -- Diffview panes are already a side-by-side comparison; a minimap on top
           -- of them is noise, and it eats width the diff needs.
-          "DiffviewFiles", "DiffviewFileHistory", "diff",
+          "DiffviewFiles",
+          "DiffviewFileHistory",
+          "diff",
         },
         exclude_buftypes = { "nofile", "nowrite", "quickfix", "terminal", "prompt" },
-        git = { enabled = true },       -- git signs in the minimap gutter
+        git = { enabled = true }, -- git signs in the minimap gutter
         -- Only errors reach the minimap. neominimap's default annotation mode is
         -- "line", which paints the whole minimap row in the diagnostic's colour, so
         -- warnings turned the map into a yellow bar in any file a linter dislikes.
         -- A bare severity value means exactly that level, not that level and above.
         diagnostic = { enabled = true, severity = vim.diagnostic.severity.ERROR },
-        search = { enabled = true },    -- show matches from / in the minimap
+        search = { enabled = true }, -- show matches from / in the minimap
         treesitter = { enabled = true },
       }
     end,
