@@ -17,6 +17,11 @@ return {
       vim.g.neominimap = {
         auto_enable = true,
         layout = "split",
+        -- MOD 24 -- hide the whole sidebar while a large file is focused, then restore it for ordinary files.
+        tab_filter = function(tab)
+          local win = vim.api.nvim_tabpage_get_win(tab)
+          return vim.bo[vim.api.nvim_win_get_buf(win)].filetype ~= "bigfile"
+        end,
         -- Skip buffers where a minimap is meaningless or actively in the way.
         exclude_filetypes = {
           "help",
